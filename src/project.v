@@ -28,7 +28,7 @@ module tt_um_example (
 
   wire reset, clockDivider;
   assign reset = ~rst_n;
-  assign 
+  //assign 
     
     clockDivider clockDiv (
         .clk(clk),
