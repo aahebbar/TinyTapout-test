@@ -44,14 +44,14 @@ module clockDivider (
     input reset,
     output reg dividedClock
 );
-    reg [9:0] count;
+    reg [1:0] count;
 
     always @ (posedge clk, posedge reset) begin
         if (reset) begin
-            count <= 10'd24;
+            count <= 2'b01;
             dividedClock <= 1'b0;
-        end else if (count == 1023) begin
-            count <= 10'd24;
+        end else if (count == 2'b10) begin
+            count <= 2'b01;
             dividedClock <= ~dividedClock;
         end else begin
             count <= count + 1'b1;
