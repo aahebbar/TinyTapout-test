@@ -40,22 +40,13 @@ endmodule
 
 
 module clockDivider (
-    input clk,
-    input reset,
-    output reg dividedClock
+    input [3:0] a,
+    input [3:0] b,
+    input cin,
+    output reg [3:0] sum,
+    output reg carry
 );
-    reg [1:0] count;
-
-    always @ (posedge clk, posedge reset) begin
-        if (reset) begin
-            count <= 2'b01;
-            dividedClock <= 1'b0;
-        end else if (count == 2'b10) begin
-            count <= 2'b01;
-            dividedClock <= ~dividedClock;
-        end else begin
-            count <= count + 1'b1;
-            dividedClock <= dividedClock;
-        end
-    end
+    always @ (*)
+        {carry, sum} = a + b + cin;
+    
 endmodule
