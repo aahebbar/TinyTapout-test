@@ -17,29 +17,39 @@ module tt_um_example (
 );
 
   // All output pins must be assigned. If not used, assign to 0.
+    /*
     assign uo_out[6:1]  = 6'b0;  // Example: ou_out is the sum of ui_in and uio_in
     assign uo_out[0] = clockDivider;
     assign uo_out[7] = &{ena, clk, rst_n, 1'b0} && &ui_in; 
     assign uio_out = 0;
     assign uio_oe  = 1;
-
-  // List all unused inputs to prevent warnings
-  //wire _unused = &{ena, clk, rst_n, 1'b0};
-
-  wire reset, clockDivider;
-  assign reset = ~rst_n;
-  //assign 
+    */
     
-    clockDivider clockDiv (
-        .clk(clk),
-        .reset(reset),
-        .clockDivider(clockDivider)
+  // List all unused inputs to prevent warnings
+  wire _unused = |{ena, clk, rst_n, 1'b0};
+
+    wire [3:0] a, b, sum;
+    wire cin, carry;
+  //assign 
+    assign a = ui_in[7:4];
+    assign b = ui_in[3:0];
+    assign cin = uio_in[0];
+    assign uio_oe = {7'b1111111, 1'b0};
+    assign uo_out = {3'b000, carry, sum};
+    assign uio_out = 8'b0000_0000;
+    
+    simpleAdder add1 (
+        .a(a),
+        .b(b),
+        .cin(cin),
+        .sum(sum),
+        .carry(carry)
     );
   
 endmodule
 
 
-module clockDivider (
+module simpleAdder (
     input [3:0] a,
     input [3:0] b,
     input cin,
