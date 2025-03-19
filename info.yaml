@@ -1,5 +1,5 @@
 # Tiny Tapeout project information
-project:  "Simple Adder"
+project:  #"Simple Adder"
   title:        "Simple Adder"      # Project title
   author:       "UserA2H1"      # Your name
   discord:      "None2341"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
